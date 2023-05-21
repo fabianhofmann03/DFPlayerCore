@@ -22,14 +22,7 @@ void dfplayer::sendCommand(uint8_t command, uint16_t parameters, bool feedback) 
     response[8] = 0x00FF & checksum;
     response[9] = 0xEF;
 
-    Serial.print("Sending: ");
-    for(int x = 0; x < 10; x++) {
-        Serial.print(response[x], HEX);
-        Serial.print(" ");
-    }
-    Serial.println();
-
-    Serial2.write((char*)response, 10);
+    (*hs).write((char*)response, 10);
 }
 
 void dfplayer::playNextSound() {
