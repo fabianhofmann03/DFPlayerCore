@@ -1,0 +1,17 @@
+{
+    "name": "dlplayer",
+    "version": "1.0.0",
+    "description": "The DLPlayer is a mini MP3 Player.",
+    "keywords": "dlplayer, mp3, player",
+    "authors":
+    [
+      {
+        "name": "Fabian Hofmann",
+        "email": "fabi.hofmann@gmx.at"
+      }
+    ],
+    "license": "MIT",
+    "frameworks": "*",
+    "platforms": "*"
+  }
+  
