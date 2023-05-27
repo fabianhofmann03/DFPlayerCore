@@ -1,6 +1,6 @@
 # dfplayer
 ## Overview
-This library is for the dfrobot mp3 player
+This library is for the dfrobot mp3 player. [Datasheet used](http://www.robotsforfun.com/datasheets/DFPlayer.pdf)
 
 # Use
 
