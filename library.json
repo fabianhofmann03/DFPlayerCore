@@ -1,8 +1,8 @@
 {
-    "name": "dlplayer",
+    "name": "DFPlayer Core",
     "version": "1.0.0",
-    "description": "The DLPlayer is a mini MP3 Player.",
-    "keywords": "dlplayer, mp3, player",
+    "description": "The core-library for my DFPlayer library.",
+    "keywords": "dlplayer, mp3, player, core",
     "authors":
     [
       {

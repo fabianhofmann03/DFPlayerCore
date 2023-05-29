@@ -1,26 +1,48 @@
-# dfplayer
+# DFPlayer Core
 ## Overview
 This library is for the dfrobot mp3 player. [Datasheet used](http://www.robotsforfun.com/datasheets/DFPlayer.pdf)
 
-Arduino only right now.
+The core library. 
 
-## Setup
+## How to use
 
-To use the dfplayer you have to initialize it first. There you have to give it the pointer to the Serial port that the module uses.
+### Audio functions
+
+The audio functions are used to tell the module what audio or how to play the audio. Because this is the core library, the functions don't actually tell the module anything. They generate the code that has to be sent to the module. 
+
+In order to do that you have to execute one of the [audio functions](#usable-audio-functions).
+```c
+playNext();                 // Example
 ```
-dfplayer player(&Serial3);
+Then the data will be stored in a result array. You can get the pointer using the `getResult()` function.
+```c
+uint8_t result_len = *getResult();
+uint8_t* result = getResult() + 1;
 ```
+As you can see, the length of the result, that has to be sent is stored in the first entry of the array.
+Now you can send the command to the module using any way you want.
 
-Next you have to call the setup-function inside the Arduino setup-function, which starts the Serial port.
+### Responses
+
+The module also sends responses, which include certain statuses. To deal with these responses, you can make and set a response handler. A response handler is a function, that gets all the data sent from the module. It will be executed every time a valid response has been recognized.  
+A response handler must look like this:
+
+```c
+void responseHandler(uint8_t vers, uint8_t len, uint8_t cmd, uint8_t feedb, uint16_t param);
 ```
-player.setup();
+But the library still needs to get the data from the module. This is why the update function exists. The update function looks like this:
+
+```c
+void dfp_update(uint8_t resp, uint8_t* message_buffer, void (*respHand) (uint8_t vers, uint8_t len, uint8_t cmd, uint8_t feedb, uint16_t param));
 ```
+The update function needs five parameters.
+- resp - The response from the module. You need to feed the update-function the response data individually, so every for a 10 byte response you'd have call this function 10 times with each byte as the resp-parameter.
+- message_buffer - In order to make objectification possible, you have to make your own message-buffer, where the function can store the message before it can analyze it. For the DFPlayer, a 10-element array should be enough.
+- respHand - Add a pointer to your response handler function. If you don't have a response handler function, why even bother using the update-function?
 
-Well done. You now have a working dfplayer ... thingi. You can now use it's functions to play different files.
+## Usable audio functions
 
-## Play sound and change settings
-
-Here are the functions you can use to do stuff. They're in order of the command code.
+Here are the functions you can use to do stuff.
 <br><br>
 | Function | Description |
 | --- | ----------- |
@@ -51,28 +73,3 @@ Here are the functions you can use to do stuff. They're in order of the command 
 | `void setRandom();` | I don't get the documentation, but here it is: This command is used to randomly play sound files in the storage device according to physical sequence and no matter if there is a folder or not in the device. The first sound file that is conducted to be played is the first one in the device. |
 | `void repeatCurrent(bool on);` | Repeats the current song indefinetly. |
 | `void setDAC(bool on);` | Turns the DAC (Digital-Analog-Converter) on or off. |
-
-## Responses
-
-The module returns responses to certain events.
-To get access to the responses you can make a response handler. A response handler looks like this:
-```cpp
-void responseHandler(uint8_t vers, uint8_t len, uint8_t cmd, uint8_t feedb, uint16_t param);
-```
-
-To add the response handler to the dfplayer you can use the function `setResponseHandler`.
-```cpp
-player.setResponseHandler(&responseHandler);
-```
-You can also use the default response handler by using:
-```
-player.setDefaultResponseHandler();
-```
-The default response handler prints out an explanation of the response like "Track number 2 finished playing from the SD card." 
-<br>
-
-Now you have to call the `update` function, which reacts to incomming Serial data.
-```cpp
-player.update();
-```
-Now every time these's a response from the module, your function will be called.
