@@ -155,6 +155,13 @@ void sleep() {
 }
 
 /**
+ * Exits sleep mode. I think.
+*/
+void wakeup() {
+    sendCommand(0x0B, 0x0000, 0);
+}
+
+/**
  * Resets ... something?
  */
 void reset() {

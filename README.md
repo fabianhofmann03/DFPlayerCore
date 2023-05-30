@@ -57,6 +57,7 @@ Here are the functions you can use to do stuff.
 | `void specifySingleRepeat(uint16_t num);` | Selects a singe track in the root directory that will be repeated indefinetly. Same range as `specifyTrack`. |
 | `void specifyDevice(uint8_t device);` | Selects the device where the sounds are saved. Usable are USB and SD. | `player.specifyDevice(player.USB);` |
 | `void sleep();` | Puts the device into sleep mode. |
+| `void wakeup();` | Puts the device out of sleep mode. I think. |
 | `void reset();` | Resets something?. |
 | `void play();` | Continues playing. |
 | `void pause();` | Pauses the track. |

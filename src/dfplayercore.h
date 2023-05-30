@@ -38,7 +38,7 @@ void specifyEQ(uint8_t eq);                                     // 07
 void specifySingleRepeat(uint16_t num);                         // 08
 void specifyDevice(uint8_t device);                             // 09
 void sleep();                                                   // 0A
-// Reserved                                                     // 0B
+void wakeup();                                                  // 0B
 void reset();                                                   // 0C
 void play();                                                    // 0D
 void pause();                                                   // 0E
