@@ -24,7 +24,7 @@ Now you can send the command to the module using any way you want.
 
 ### Responses
 
-The module also sends responses, which include certain statuses. To deal with these responses, you can make and set a response handler. A response handler is a function, that gets all the data sent from the module. It will be executed every time a valid response has been recognized.  
+The module also sends responses, which include certain statuses. To deal with these responses, you can make and set a response handler. A response handler is a function, that gets all the data sent from the module. It will be called every time a valid response has been recognized.  
 A response handler must look like this:
 
 ```c
