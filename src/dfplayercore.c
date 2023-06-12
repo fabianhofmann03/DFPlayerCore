@@ -189,7 +189,7 @@ void pause() {
  * @param num The number of the song in the selected folder. Can range from 1 to 255.
  */
 void specifyTackInFolder(uint8_t folder, uint8_t num) {
-    sendCommand(0x0F, (folder << 8) & num , 0);
+    sendCommand(0x0F, (folder << 8) | num , 0);
 }
 
 /**
@@ -199,7 +199,7 @@ void specifyTackInFolder(uint8_t folder, uint8_t num) {
  * @param gain For the gains 💪. Can range from 0 to 31.
  */
 void setAudioAmp(bool on, uint8_t gain) {
-    sendCommand(0x10, (on << 8) & gain , 0);
+    sendCommand(0x10, (on << 8) | gain , 0);
 }
 
 /**
